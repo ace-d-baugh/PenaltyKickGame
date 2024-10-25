@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>⚽️ Penalty Kick Game 🖐</title>
+		<link rel="stylesheet" href="styles.css" />
+		<script src="script.js" defer></script>
+	</head>
+	<body>
+		<h1>Soccer Penalty Kick Game</h1>
+		<div class="game-container">
+			<div class="pitch">
+				<div id="goal">
+					<div id="ball">⚽️</div>
+					<div id="keeper">🖐</div>
+				</div>
+			</div>
+			<div class="scoreboard">
+				<div id="score">
+					<p>Player: <span id="playerScore">0</span></p>
+					<p>Keeper: <span id="keeperScore">0</span></p>
+				</div>
+				<div id="result"></div>
+			</div>
+			<div class="controls">
+				<div id="buttons">
+					<button id="btnW">➔</button>
+					<br />
+					<button id="btnA">➔</button>
+					<button id="btnS">➔</button>
+					<button id="btnD">➔</button>
+					<br />
+					<button id="btnSpace">Start?</button>
+				</div>
+			</div>
+         <div class="instructions">
+            <ul>
+               <li>To start a game, press the space bar or click the start button.</li>
+               <li>To reset the round, press the space bar again or click the reset button.</li>
+               <li>To move the ball:
+                  <ul class="indent">
+                     <li>Use the arrow keys</li>
+                     <li>Or press the W, A, S, or D button</li>
+                     <li>Or use the on-screen buttons</li>
+                  </ul>
+               </li>
+               <li>Click on this screen to remove the instructions.</li>
+            </ul>
+            <div class="close">Close</div>
+         </div>
+		</div>
+	</body>
+</html>

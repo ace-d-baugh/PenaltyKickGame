@@ -1,0 +1,192 @@
+@font-face {
+	font-family: score-board;
+	src: url(ScoreBoardSt-DX5d.ttf) format(truetype);
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100vh;
+	margin: 0;
+	background-color: #4caf50; /* Grass green background */
+}
+
+h1 {
+	font-size: calc(12px + 2vw);
+}
+
+.game-container {
+	text-align: center;
+	background: url(goal-background.png);
+	background-size: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 30px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+	width: 80%;
+	max-width: 1280px;
+	aspect-ratio: 1/1;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	overflow: hidden;
+}
+
+#goal {
+	position: absolute;
+	width: 80%;
+	aspect-ratio: 1/0.8;
+	top: 50%;
+	left: 50%;
+   font-size: calc(24px + 2vw);
+	transform: translate(-50%, -50%);
+}
+
+#ball, #keeper {
+   position: absolute;
+   transform: translate(-50%, -150%);
+   transition: all 0.5s ease-in;
+}
+
+#ball {
+	position: absolute;
+	width: 10%;
+	aspect-ratio: 1/1;
+	top: 100%;
+	left: 50%;
+	transform: translate(-50%, -150%);
+   z-index: 9;
+}
+
+#keeper {
+	position: absolute;
+	width: 10%;
+	aspect-ratio: 1/1;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -150%);
+}
+
+#score {
+	font-size: 2.5vw;
+	color: rgb(216, 221, 141);
+	display: flex;
+	justify-content: space-around;
+	background-color: rgba(0, 0, 0, 0.3);
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	line-height: 2em;
+}
+
+#playerScore,
+#keeperScore {
+	font-family: score-board;
+}
+
+#result {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+   width: 80%;
+	transform: translate(-50%, -50%);
+	font-size: calc(24px + 2vw);
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	font-weight: bold;
+	color: rgb(0, 25, 165);
+   opacity: 0;
+   transition: all 0.5s ease-in;
+}
+
+.controls {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin: 20px;
+	text-align: center;
+}
+
+#buttons {
+	margin-top: 20px;
+}
+
+#buttons button {
+	min-height: 20px;
+   height: 3.5vw;
+	max-height: 50px;
+	margin: 2.5px;
+	aspect-ratio: 1/1;
+	font-size: calc(12px * 2vw);
+	font-weight: bold;
+	color: #333;
+	background-color: #f0f0f0;
+	border: 2px solid black;
+	border-radius: 20%;
+	cursor: pointer;
+	box-shadow: 0 0 10px rgba(216, 221, 141, 1);
+	transition: background-color 0.3s, color 0.3s;
+}
+
+#buttons button:hover {
+	background-color: #333;
+	color: #f0f0f0;
+}
+
+#btnSpace {
+	aspect-ratio: 3/1 !important;
+}
+
+#btnW {
+   rotate: -90deg;
+}
+
+#btnA {
+   rotate: 180deg;
+}
+
+#btnS {
+   rotate: 90deg;
+}
+
+.instructions {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.8);
+   z-index: 10;
+   display: none;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   font-size: calc(12px * 1.5vw);
+   color: rgb(216, 221, 141);
+   font-weight: bold;
+   text-align: left;
+   padding: 20px;
+   word-wrap: normal;
+}
+
+.close {
+   position: absolute; 
+   bottom: 0%; 
+   left: 50%; 
+   transform: translate(-50%, -50%);
+}
+
+.indent {
+   margin-left: 20px;
+}
+
+.hidden {
+   display: none;
+}
