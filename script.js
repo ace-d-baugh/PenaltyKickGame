@@ -19,6 +19,10 @@ const directions = {
 	S: { x: 'middle', y: 'middle' },
 	D: { x: 'right', y: 'middle' },
 	W: { x: 'middle', y: 'top' },
+	ArrowLeft: { x: 'left', y: 'middle' },
+	ArrowDown: { x: 'middle', y: 'middle' },
+	ArrowRight: { x: 'right', y: 'middle' },
+	ArrowUp: { x: 'middle', y: 'top' },
 };
 
 const positions = {
@@ -29,26 +33,26 @@ const positions = {
 };
 
 function resetPositions() {
+	playerScoreElement.textContent = playerScore;
+	keeperScoreElement.textContent = keeperScore;
 	ball.style.left = '50%';
 	ball.style.top = '100%';
 	keeper.style.left = '50%';
 	keeper.style.top = '50%';
-	resultElement.textContent = '';
+	resultElement.textContent = '';  
 	isSpacePressed = true;
 	spaceElement.textContent = 'Reset';
 }
 
 document.addEventListener('keydown', (event) => {
-	const key = event.key.toUpperCase();
+	let key = event.key.toUpperCase();
 	if (event.key === ' ') {
-		if (playerScore >= 5 || keeperScore >= 5) {
-			playerScore = 0;
-			keeperScore = 0;
-			playerScoreElement.textContent = playerScore;
-			keeperScoreElement.textContent = keeperScore;
-		}
 		resetPositions();
-	} else if (isSpacePressed && ['A', 'S', 'D', 'W'].includes(key)) {
+	} else if (isSpacePressed && ['A', 'S', 'D', 'W', 'ARROWLEFT', 'ARROWDOWN', 'ARROWRIGHT', 'ARROWUP'].includes(key)) {
+      if(key === 'ARROWLEFT') key = 'A';
+      if(key === 'ARROWDOWN') key = 'S';
+      if(key === 'ARROWRIGHT') key = 'D';
+      if(key === 'ARROWUP') key = 'W';
 		handleKeyPress(key);
 	}
 });
@@ -77,24 +81,29 @@ function handleKeyPress(key) {
 
 	if (playerChoice.x === keeperChoice.x && playerChoice.y === keeperChoice.y) {
 		keeperScore++;
-		resultElement.textContent = `😿\nKeeper saved!😿`;
+		resultElement.textContent = `😿Blocked!😿`;
 		resultElement.style = 'opacity: 1;';
 	} else {
 		playerScore++;
-		resultElement.textContent = `😸\nGoal!\n😸`;
+		resultElement.textContent = `😸Gooooal!😸`;
 		resultElement.style = 'opacity: 1;';
 	}
 
 	if (playerScore >= 5 || keeperScore >= 5) {
 		resultElement.textContent = playerScore >= 5 ? `😹You win!😹` : `😾Keeper wins!😾`;
 		spaceElement.textContent = 'Start?';
+		playerScoreElement.textContent = playerScore;
+		keeperScoreElement.textContent = keeperScore;
+		playerScore = 0;
+		keeperScore = 0;
+	} else {
+		playerScoreElement.textContent = playerScore;
+		keeperScoreElement.textContent = keeperScore;
 	}
-	playerScoreElement.textContent = playerScore;
-	keeperScoreElement.textContent = keeperScore;
+
 	isSpacePressed = false;
 }
 
-// Show Instructions or hide them
 function toggleInstructions() {
 	const instructionsDiv = document.querySelector('.instructions');
 	if (instructionsDiv.classList.contains('hidden')) {
@@ -103,7 +112,5 @@ function toggleInstructions() {
 		instructionsDiv.classList.add('hidden');
 	}
 }
-
-// Add event listener to the close button
-document.querySelector('.close').addEventListener('click', toggleInstructions);
-document.querySelector('.close').addEventListener('touchstart', toggleInstructions);
+document.querySelector('.instructions').addEventListener('click', toggleInstructions);
+document.querySelector('.instructions').addEventListener('touchstart', toggleInstructions);
