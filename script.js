@@ -35,16 +35,16 @@ function resetPositions() {
 	keeper.style.top = '50%';
 	resultElement.textContent = '';
 	isSpacePressed = true;
-   spaceElement.textContent = 'Reset';
+	spaceElement.textContent = 'Reset';
 }
 
 document.addEventListener('keydown', (event) => {
 	const key = event.key.toUpperCase();
 	if (event.key === ' ') {
-      if (playerScore >= 5 || keeperScore >= 5) {
+		if (playerScore >= 5 || keeperScore >= 5) {
 			playerScore = 0;
 			keeperScore = 0;
-         playerScoreElement.textContent = playerScore;
+			playerScoreElement.textContent = playerScore;
 			keeperScoreElement.textContent = keeperScore;
 		}
 		resetPositions();
@@ -53,11 +53,17 @@ document.addEventListener('keydown', (event) => {
 	}
 });
 
-btnA.addEventListener('click', () => (isSpacePressed ? handleKeyPress('A') : ''));
-btnS.addEventListener('click', () => (isSpacePressed ? handleKeyPress('S') : ''));
-btnD.addEventListener('click', () => (isSpacePressed ? handleKeyPress('D') : ''));
-btnW.addEventListener('click', () => (isSpacePressed ? handleKeyPress('W') : ''));
+function addTouchListeners(button, key) {
+	button.addEventListener('click', () => (isSpacePressed ? handleKeyPress(key) : ''));
+	button.addEventListener('touchstart', () => (isSpacePressed ? handleKeyPress(key) : ''));
+}
+
+addTouchListeners(btnA, 'A');
+addTouchListeners(btnS, 'S');
+addTouchListeners(btnD, 'D');
+addTouchListeners(btnW, 'W');
 btnSpace.addEventListener('click', resetPositions);
+btnSpace.addEventListener('touchstart', resetPositions);
 
 function handleKeyPress(key) {
 	const playerChoice = directions[key];
@@ -72,31 +78,32 @@ function handleKeyPress(key) {
 	if (playerChoice.x === keeperChoice.x && playerChoice.y === keeperChoice.y) {
 		keeperScore++;
 		resultElement.textContent = `😿\nKeeper saved!😿`;
-      resultElement.style = "opacity: 1;";
+		resultElement.style = 'opacity: 1;';
 	} else {
 		playerScore++;
 		resultElement.textContent = `😸\nGoal!\n😸`;
-      resultElement.style = 'opacity: 1;';
+		resultElement.style = 'opacity: 1;';
 	}
 
 	if (playerScore >= 5 || keeperScore >= 5) {
 		resultElement.textContent = playerScore >= 5 ? `😹You win!😹` : `😾Keeper wins!😾`;
-      spaceElement.textContent = 'Start?';
+		spaceElement.textContent = 'Start?';
 	}
-   playerScoreElement.textContent = playerScore;
+	playerScoreElement.textContent = playerScore;
 	keeperScoreElement.textContent = keeperScore;
 	isSpacePressed = false;
 }
 
 // Show Instructions or hide them
 function toggleInstructions() {
-   const instructionsDiv = document.querySelector('.instructions');
-   console.log(instructionsDiv);
-   if (instructionsDiv.classList.contains('hidden')) {
-      instructionsDiv.classList.remove('hidden');
-   } else {
-      instructionsDiv.classList.add('hidden');
-   }
+	const instructionsDiv = document.querySelector('.instructions');
+	if (instructionsDiv.classList.contains('hidden')) {
+		instructionsDiv.classList.remove('hidden');
+	} else {
+		instructionsDiv.classList.add('hidden');
+	}
 }
 
-document.querySelector('.instructions').addEventListener('click', toggleInstructions);
+// Add event listener to the close button
+document.querySelector('.close').addEventListener('click', toggleInstructions);
+document.querySelector('.close').addEventListener('touchstart', toggleInstructions);
