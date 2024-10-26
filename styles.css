@@ -21,7 +21,8 @@ body {
 }
 
 h1 {
-	font-size: calc(12px + 2vw);
+	font-size: calc(30px + 2vw);
+	margin-bottom: 20px;
 }
 
 .game-container {
