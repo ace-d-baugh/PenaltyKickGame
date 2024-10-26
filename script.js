@@ -91,7 +91,7 @@ function handleKeyPress(key) {
 
 	if (playerScore >= 5 || keeperScore >= 5) {
 		resultElement.textContent = playerScore >= 5 ? `😹You win!😹` : `😾Keeper wins!😾`;
-		spaceElement.textContent = 'Start?';
+		spaceElement.textContent = 'New Game';
 		playerScoreElement.textContent = playerScore;
 		keeperScoreElement.textContent = keeperScore;
 		playerScore = 0;
