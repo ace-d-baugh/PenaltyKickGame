@@ -22,7 +22,7 @@ body {
 
 h1 {
 	font-size: calc(30px + 2vw);
-	margin-bottom: 20px;
+	padding-bottom: 20px;
 }
 
 .game-container {
